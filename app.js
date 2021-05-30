@@ -26,3 +26,34 @@ do {
         console.log("OK, YOU QUIT THE APP");
     }
 } while ((string !== "quit"));
+
+function range(a,b, step) {
+    if (step === undefined) {
+        step=1;
+    }
+    let array=[];
+    if(a<b) {
+        for (let i = a; i <= b; i=i+step) {
+            array.push(i);
+        }
+    }
+    if (a > b) {
+        for (let i = a; i>=b; i=i+step) {
+            array.push(i);
+        }
+    }
+    return array;
+}
+
+function sum(array) {
+    let total = 0;
+    for(let i = 0; i < array.length; i++) {
+        total = total + array[i];
+    }
+    return total;
+}
+
+
+
+
+
