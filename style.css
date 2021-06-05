@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+  }
+
+  body {
+      text-align: center;
+      
+  }
+  h1 {
+      font-size: 2rem;
+  }
+
+  button {
+      font-size: 0.8rem;
+      background-color: #d3d3d3;
+      border: 1px solid gray;
+      padding: 0.5em 0.5em;
+      border-radius: 7px;
+      margin-top: 1em;
+  }
