@@ -1,24 +1,32 @@
-function countBs(string) {
-    let count=0;
-    for (let i = 0; i < string.length; i++) {
-        if (string[i]==='B') {
-            count=count+1;
+
+    function arrayToList(array) {
+        let result = {};
+        if (Array.isArray(array)) {
+          let currListItem = result;
+          for (let item of array) {
+           
+            let newListItem = {
+                value: item,
+                rest: null
+            };
+            console.log({}.rest);
+            if (typeof currListItem.rest === 'undefined') {
+                
+              result = newListItem;
+            } else {
+                
+                currListItem.rest = newListItem;
+            }
+            currListItem = newListItem;
+          }
         }
-    }
-    return count;
-}
+        
 
-console.log(countBs('BasBak'));
+        //return result;
 
-function countChar(string, index, ) {
-    let countTwo=0
-    for (let i = 0; i < string.length; i++) {
-        if (string[i]===index) {
-            countTwo+=1;
-        }
-    }
-    return countTwo;
-}
+      }
 
 
-console.log(countChar("kakkerlak", "k"));
+
+
+arrayToList([10,20,30]);
