@@ -1,29 +1,42 @@
 function arrayToList(array) {
-    let result = {};
-    if (Array.isArray(array)) {
-      let currListItem = result;
-      for (let item of array) {
-        console.log(currListItem);
-        
-        let newListItem = {
-            value: item,
-            rest: null
-        };
+    let list = null; 
+    for (let i = array.length; i >= 0; i--) {
+        list = {value: array[i], rest: list};
+    }
+    return list; 
+}
 
-        console.log(newListItem);
-
-        if (typeof currListItem.rest === 'undefined') {
-          result = newListItem;
+function listToArray (list) {
+    let array = [];
+    for (let node = list; node; node=node.rest){
+        if (node.value !== undefined) {   
+            array.push(node.value);
         } 
-        else {
-            currListItem.rest = newListItem;
-        }
-        currListItem = newListItem;
-        console.log(currListItem);
     }
-    //console.log(result)
+    return array;
+}
+
+function prepend(element, list) {
+    let newList={};
+    newList.value=element;
+    newList.rest=list;
+    return newList;
+}
+
+function nth (list, number) {
+    let array =[];
+    for (let node = list; node; node = node.rest) {
+        if(node.value!==undefined) {
+            array.push(node.value);
+        }  
     }
-  }
+    return array[number];
+}
 
-  arrayToList([10,20,30]);
 
+console.log(nth(arrayToList([10,20,30]), 0))
+
+//console.log(prepend(10, prepend(20, null)));
+
+//console.log(arrayToList([10,20,30]));
+//console.log(listToArray(arrayToList([10,20,30])));
