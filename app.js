@@ -130,7 +130,7 @@ function reverseArray(array) {
     return newArray;
 }
 
-console.log(reverseArray(["A", "B", "C"]));
+//console.log(reverseArray(["A", "B", "C"]));
 
 function reverseArrayInPlace(array) {
     for(let i = 0; i < array.length/2; i++) {
@@ -142,22 +142,114 @@ function reverseArrayInPlace(array) {
 }
 
 let arrayValue=[1,2,3,4,5,6,7];
-console.log(reverseArrayInPlace(arrayValue));
+//console.log(reverseArrayInPlace(arrayValue));
 
 //PROBLEM #9
 
 function arrayToList(array) {
-    let object ={};
+
+    let object= null;
+    
     for (let i = array.length-1; i >= 0; i--) {
-        
-        object.value=array[i];
-        object.rest=null;
-        console.log(array[i]);
-       if (array.length > 1) {
-           object.value = array[i+1] ;
-       }
+        object={value: array[i], rest: object};
     }
     return object;
 }
 
-console.log(arrayToList([10, 20]));
+//arrayToList([10, 20,30]);
+
+function listToArray(list) {
+    let array=[];
+    
+    for (let x = list; x; x=x.rest) {
+        
+        array.push(x.value);
+    }
+    return array;
+}
+
+//console.log(listToArray(arrayToList([10, 20, 30])));
+
+function prepend (element, list) {
+    let obj = {};
+    obj.value=element;
+    obj.rest=list;
+    return obj;
+}
+
+
+let x = arrayToList([10,20,30]);
+
+
+//console.log(prepend(10, prepend(20, null)));
+
+function nth(list, num) {
+    if (list.rest==null) {
+        return undefined;
+    } 
+    if (num==0) {
+        return list.value;
+    }
+    else if (num==1) {
+        let x = list.rest;
+        return x.value;
+    }
+    else {      
+        return nth(list.rest, num-1)
+    }   
+}
+
+//console.log(nth(x, 3));
+
+
+//PROBLEM #10
+
+function deepEqual(object1,object2) {
+
+    if((typeof object1 == "object" && object1 !== null) && (typeof object2 == "object" && object2 !== null )) {
+        let keys=Object.keys(object1);
+        let keys2=Object.keys(object2);
+        
+        if(keys.length == keys2.length) {
+            for (let key of keys) {
+                return deepEqual(object1[key], object2[key]);    
+            }
+        }
+        else {
+            return false; 
+        }
+    }
+    else if(object1 == object2) {
+        return true; 
+    }
+    else {
+        return false;
+    }
+    
+}
+
+//let obj = {here: {is: "an"}, object: 2};
+//console.log(deepEqual(obj, obj));
+//console.log(deepEqual(obj, {here: {is: "an"}, object: 2}));
+//console.log(deepEqual(obj, {here: 1, object: 2}));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
