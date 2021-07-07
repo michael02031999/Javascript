@@ -178,7 +178,7 @@ function prepend (element, list) {
 }
 
 
-let x = arrayToList([10,20,30]);
+//let x = arrayToList([10,20,30]);
 
 
 //console.log(prepend(10, prepend(20, null)));
@@ -209,6 +209,12 @@ function deepEqual(object1,object2) {
     if((typeof object1 == "object" && object1 !== null) && (typeof object2 == "object" && object2 !== null )) {
         let keys=Object.keys(object1);
         let keys2=Object.keys(object2);
+
+        for (let i = 0; i < keys.length; i++) {
+            if (keys[i] !== keys2[i]) {
+                return false;
+            }
+        }
         
         if(keys.length == keys2.length) {
             for (let key of keys) {
@@ -228,23 +234,87 @@ function deepEqual(object1,object2) {
     
 }
 
-//let obj = {here: {is: "an"}, object: 2};
-//console.log(deepEqual(obj, obj));
-//console.log(deepEqual(obj, {here: {is: "an"}, object: 2}));
-//console.log(deepEqual(obj, {here: 1, object: 2}));
+/*let obj = {here: {is: "an"}, object: 2};
+console.log(deepEqual(obj, obj));
+console.log(deepEqual(obj, {here: {is: "an"}, object: 2}));
+console.log(deepEqual(obj, {piss: 1, object: 2}));*/
 
 
+//PROBLEM #11
+function flatten (array) {
+    return array.reduce((a,b) => a.concat(b));
+}
+let arrays = [[1, 2, 3], [4, 5], [6]];
+//console.log(flatten(arrays));
 
+//PROBLEM #12 
 
+function loop (value, test, update, body) {
+    for (let i = value; test(i); i = update(i)) {
+        body(i);
+    }
+}
+//console.log(loop(3, n => n > 0, n => n - 1, console.log));
 
+//PROBLEM #13
 
+function every(array, test) {
+    return !array.some(element => !test(element));
+}
 
+//console.log(every([1, 3, 5], n => n < 10));
+//console.log(every([2, 4, 16], n => n < 10));
+//console.log(every([], n => n < 10));
 
+//PROBLEM #14
 
-
-
-
-
+function characterScript(code) {
+    for (let script of SCRIPTS) {
+      if (script.ranges.some(([from, to]) => {
+        return code >= from && code < to;
+      })) {
+        return script;
+      }
+    }
+    return null;
+  }
+  
+  function countBy(items, groupName) {
+    let counts = [];
+    for (let item of items) {
+      let name = groupName(item);
+  
+      let known = counts.findIndex(c => c.name == name);
+      if (known == -1) {
+        counts.push({name, count: 1});
+      } else {
+        counts[known].count++;
+      }
+    }
+    return counts;
+  }
+  
+  
+  function dominantDirection(text) {
+    let newArr = Array.from(text);
+    let completeArray = [];
+    for(let i = 0; i < newArr.length; i++) {
+      completeArray.push(characterScript(newArr[i].codePointAt(0)));
+    }
+    
+    let workingArray=completeArray.filter(x => x !== null);
+   
+    let scriptType = countBy(workingArray, (x => x.direction));
+    
+    let store=[];
+    for (let j = 0; j < scriptType.length; j++) {
+      let last = 0;
+      store.push(scriptType[j].count); 
+    }
+    let position = store.indexOf(Math.max(...store));
+    
+    return scriptType[position].name;
+  }
 
 
 
