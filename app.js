@@ -643,10 +643,18 @@ function hasPackage (place, parcels) {
       }
        return {direction: route[0], memory: route.slice(1)};
   }
-  
-/*let num = 0; 
-for (let i = 0; i < 4; i++) {
-  num += runRobot(VillageState.random(), myRobot, []);
+
+
+/*let num = 0;
+for (let i = 0; i < 100; i++) {
+    num += runRobot(VillageState.random(), myRobotWinner, []);
+}*/
+
+//PROBLEM #21
+
+class PGroup {
+    
 }
-console.log(num);*/
+
+
 
