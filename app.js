@@ -653,8 +653,70 @@ for (let i = 0; i < 100; i++) {
 //PROBLEM #21
 
 class PGroup {
-
+    constructor (members) {
+        this.members = members 
+    }
+    add(letter) {
+        if (this.has(letter)) {
+            return this;
+        }
+        else {
+            let copy = [...this.members]
+            copy.push(letter);
+            return new PGroup(copy);
+        }
+    }
+    delete(letter) {
+        if (this.has(letter)==true) {
+            return new PGroup (this.members.filter(x => x !== letter));
+        }
+        else {
+            return this;
+        }
+        
+    }
+    has (letter) {
+        return this.members.includes(letter);
+    }
 }
-//Testing if this works
+/*PGroup.empty = new PGroup([]);
+let a = PGroup.empty.add("a");
+let ab = a.add("b");
+console.log(ab);
 
+let b = ab.delete("a");
+console.log(b);
 
+console.log(b.has("b"));
+console.log(a.has("b"));
+console.log(b.has("a"));
+*/
+//This is correct but I mostly cheated because I can't control myself
+
+//PROBLEM #22
+
+class MultiplicatorUnitFailure extends Error {}
+
+function primitiveMultiply(a, b) {
+  if (Math.random() < 0.2) {
+    return a * b;
+  } else {
+    throw new MultiplicatorUnitFailure("Klunk");
+  }
+}
+
+function reliableMultiply(a, b) {
+  for (;;) {
+     try {
+      	  return primitiveMultiply(a,b); 
+        } catch(e) {
+          if (e instanceof MultiplicatorUnitFailure) {
+            continue;
+          }
+          else {
+            throw e;
+          }
+          //console.log("Errors still exist");
+  		}  
+  	}
+}
